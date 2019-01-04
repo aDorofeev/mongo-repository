@@ -1,0 +1,3 @@
+services:
+  # Aliases
+  MongoDB\Database: "@mongo.connection.default"

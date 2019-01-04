@@ -1,0 +1,22 @@
+{
+    "name": "adorofeev/mongo-repository",
+    "description": "A very thin data mapping layer on top of MongoDB driver",
+    "keywords": ["MongoDB", "Symfony", "ODM"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Dorofeev",
+            "email": "anton@dorofeev.me"
+        }
+    ],
+    "require": {
+        "php" : "^7.3",
+        "facile-it/mongodb-bundle": "^0.7.0",
+        "netresearch/jsonmapper": "^1.4"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": { "Adorofeev\\MongoRepository\\": "/" }
+    }
+}
