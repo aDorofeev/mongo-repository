@@ -130,7 +130,7 @@ abstract class BaseMongoRepository
             unset($mergedBson->_id);
 
             /** @var UpdateResult $response */
-            $response = $this->getCollection()->updateOne(['_id' => new ObjectId($entity->getId())], ['$set' => $mergedBson]);
+            $this->getCollection()->updateOne(['_id' => new ObjectId($entity->getId())], ['$set' => $mergedBson]);
 
             return $this->wakeUp($mergedBson);
         } else {
