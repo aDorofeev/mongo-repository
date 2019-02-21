@@ -8,6 +8,7 @@ namespace Adorofeev\MongoRepository\Repository;
 
 
 use Adorofeev\MongoRepository\Entity\BaseEntity;
+use Adorofeev\MongoRepository\Value\BSONDatetime;
 use MongoDB\BSON\ObjectId;
 use MongoDB\Collection;
 use MongoDB\Database;
@@ -65,6 +66,8 @@ abstract class BaseMongoRepository
                 $left->$key = $rightValue;
             } elseif (($leftValue instanceof BSONDocument) && ($rightValue instanceof BSONDocument)) {
                 $left->$key = $this->deepMergeBson($leftValue, $rightValue);
+            } elseif (($leftValue instanceof BSONDatetime) && ($rightValue instanceof BSONDatetime)) {
+                $left->$key = $rightValue;
             } elseif ($leftValue instanceof BSONArray && $rightValue instanceof BSONArray) {
                 $left->$key = $rightValue;
             } elseif (null === $leftValue && null === $rightValue) {
@@ -74,7 +77,12 @@ abstract class BaseMongoRepository
             } elseif (null === $rightValue) {
                 $left->$key = $leftValue;
             } else {
-                dump($leftValue, $rightValue); die;
+                dump($leftValue, $rightValue);
+
+                throw new \InvalidArgumentException(sprintf('Don\'t know how to merge %s and %s',
+                  is_object($leftValue) ? get_class($leftValue) : gettype($leftValue),
+                  is_object($rightValue) ? get_class($rightValue) : gettype($rightValue)
+                ));
             }
         }
 
