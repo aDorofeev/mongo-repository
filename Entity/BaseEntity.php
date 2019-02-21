@@ -57,7 +57,7 @@ abstract class BaseEntity implements \JsonSerializable
             } elseif (is_scalar($value) || $value === null) {
                 continue;
             } elseif ($value instanceof UTCDateTime) {
-                $newValue = BSONDatetime::fromDateTime($value);
+                $newValue = BSONDatetime::fromUTCDatetime($value);
             } else {
                 throw new \LogicException(sprintf(
                     'Value wasn\'t converted: %s = %s',
