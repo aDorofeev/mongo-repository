@@ -7,7 +7,9 @@
 namespace Adorofeev\MongoRepository\Entity;
 
 
+use Adorofeev\MongoRepository\Value\BSONDatetime;
 use MongoDB\BSON\ObjectId;
+use MongoDB\BSON\UTCDateTime;
 use MongoDB\Model\BSONArray;
 use MongoDB\Model\BSONDocument;
 
@@ -54,6 +56,8 @@ abstract class BaseEntity implements \JsonSerializable
                 unset($jsonDocument->_id);
             } elseif (is_scalar($value) || $value === null) {
                 continue;
+            } elseif ($value instanceof UTCDateTime) {
+                $newValue = BSONDatetime::fromDateTime($value);
             } else {
                 throw new \LogicException(sprintf(
                     'Value wasn\'t converted: %s = %s',

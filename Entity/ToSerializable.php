@@ -7,7 +7,8 @@
 namespace Adorofeev\MongoRepository\Entity;
 
 
-use App\Entity\DateTime;
+use Adorofeev\MongoRepository\Value\DateTime;
+use Adorofeev\MongoRepository\Value\BSONDatetime;
 
 trait ToSerializable
 {
@@ -47,6 +48,8 @@ trait ToSerializable
 
             if (is_scalar($varValue) || (null === $varValue)) {
                 $newValue = $varValue;
+            } elseif ($varValue instanceof BSONDatetime) {
+                $newValue = $varValue->$serializerMethodName();
             } elseif ($varValue instanceof DateTime) {
 //                $newValue = (string) $varValue;
                 $newValue = $varValue->getTimestamp();

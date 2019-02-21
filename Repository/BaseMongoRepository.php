@@ -127,8 +127,10 @@ abstract class BaseMongoRepository
             /** @var BSONDocument $mergedBson */
             $mergedBson = $this->deepMergeBson($oldDocumentBson, $newDocumentBson);
 
+            unset($mergedBson->_id);
+
             /** @var UpdateResult $response */
-            $response = $this->getCollection()->replaceOne(['_id' => new ObjectId($entity->getId())], $mergedBson);
+            $response = $this->getCollection()->updateOne(['_id' => new ObjectId($entity->getId())], ['$set' => $mergedBson]);
 
             return $this->wakeUp($mergedBson);
         } else {
