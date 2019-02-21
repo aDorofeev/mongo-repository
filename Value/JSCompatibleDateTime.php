@@ -9,7 +9,7 @@ namespace Adorofeev\MongoRepository\Value;
 
 use DateTimeZone;
 
-class DateTime extends \DateTime
+class JSCompatibleDateTime extends \DateTime
 {
 
     public function __construct(string $time = 'now', DateTimeZone $timezone = null)

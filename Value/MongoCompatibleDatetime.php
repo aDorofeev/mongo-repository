@@ -5,7 +5,7 @@ namespace Adorofeev\MongoRepository\Value;
 use DateTimeZone;
 use MongoDB\BSON\UTCDateTime;
 
-class BSONDatetime extends \DateTime
+class MongoCompatibleDatetime extends \DateTime
 {
     public function __construct(string $time = 'now', DateTimeZone $timezone = null)
     {

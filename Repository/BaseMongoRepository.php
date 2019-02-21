@@ -8,8 +8,9 @@ namespace Adorofeev\MongoRepository\Repository;
 
 
 use Adorofeev\MongoRepository\Entity\BaseEntity;
-use Adorofeev\MongoRepository\Value\BSONDatetime;
+use Adorofeev\MongoRepository\Value\MongoCompatibleDatetime;
 use MongoDB\BSON\ObjectId;
+use MongoDB\BSON\UTCDateTime;
 use MongoDB\Collection;
 use MongoDB\Database;
 use MongoDB\Model\BSONArray;
@@ -66,7 +67,7 @@ abstract class BaseMongoRepository
                 $left->$key = $rightValue;
             } elseif (($leftValue instanceof BSONDocument) && ($rightValue instanceof BSONDocument)) {
                 $left->$key = $this->deepMergeBson($leftValue, $rightValue);
-            } elseif (($leftValue instanceof BSONDatetime) && ($rightValue instanceof BSONDatetime)) {
+            } elseif (($leftValue instanceof UTCDateTime) && ($rightValue instanceof UTCDateTime)) {
                 $left->$key = $rightValue;
             } elseif ($leftValue instanceof BSONArray && $rightValue instanceof BSONArray) {
                 $left->$key = $rightValue;
