@@ -52,7 +52,7 @@ trait ToSerializable
                 $newValue = $varValue->$serializerMethodName();
             } elseif ($varValue instanceof JSCompatibleDateTime) {
 //                $newValue = (string) $varValue;
-                $newValue = $varValue->getTimestamp();
+                $newValue = $varValue->format('c');
             } elseif ($varValue instanceof \DateTime) {
                 $newValue = $varValue->getTimestamp();
             } elseif (\is_array($varValue) || $varValue instanceof \Traversable) {

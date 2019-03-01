@@ -52,7 +52,7 @@ class JSCompatibleDateTime extends \DateTime
 
     public function __toString(): string
     {
-        return (string) $this->getTimestamp();
+        return (string) $this->format('c');
     }
 
 }
