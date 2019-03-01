@@ -56,7 +56,13 @@ trait ToSerializable
             } elseif ($varValue instanceof \DateTime) {
                 $newValue = $varValue->getTimestamp();
             } elseif (\is_array($varValue) || $varValue instanceof \Traversable) {
-                $newValue = \count($varValue) ? $this->$serializerMethodName($emptyObject, $emptyCollection, $varValue, $traversed) : [];
+                if (\count($varValue)) {
+                    $newValue = $this->$serializerMethodName($emptyObject, $emptyCollection, $varValue, $traversed);
+                } elseif (\is_string($emptyCollection)) {
+                    $newValue = new $emptyCollection;
+                } else {
+                    $newValue = $emptyCollection;
+                }
             } elseif ($varValue instanceof self) {
                 $duplicate = false;
                 foreach ($traversed as $parentObject) {
