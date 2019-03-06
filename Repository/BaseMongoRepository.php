@@ -73,6 +73,8 @@ abstract class BaseMongoRepository
                 $left->$key = $rightValue;
             } elseif (null === $leftValue && null === $rightValue) {
                 $left->$key = null;
+            } elseif (null !== $leftValue && null === $rightValue) {
+                $left->$key = $rightValue;
             } elseif (null === $leftValue) {
                 $left->$key = $rightValue;
             } elseif (null === $rightValue) {
